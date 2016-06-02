@@ -7,6 +7,10 @@ timeout 30
 stderr_path File.expand_path('../../../log/unicorn_stderr.log', __FILE__)
 stdout_path File.expand_path('../../../log/unicorn_stdout.log', __FILE__)
 
+before_exec do |server|
+  ENV['BUNDLE_GEMFILE'] = File.join(File.expand_path('../../../..', __FILE__), 'current', 'Gemfile')
+end
+
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
 

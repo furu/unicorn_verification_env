@@ -38,6 +38,7 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/sockets'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+set :keep_releases, 3
 
 namespace :deploy do
 
