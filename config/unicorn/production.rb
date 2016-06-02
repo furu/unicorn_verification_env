@@ -1,5 +1,6 @@
 listen 8080
 worker_processes 1
+working_directory File.expand_path('../../../../current', __FILE__)
 pid File.expand_path('../../../tmp/pids/unicorn.pid', __FILE__)
 preload_app true
 timeout 30
@@ -15,7 +16,7 @@ before_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
 
   old_pid = "#{server.config[:pid]}.oldbin"
-  if old_pid != server.pid
+  if File.exist?(old_pid) && old_pid != server.pid
     begin
       sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
       Process.kill(sig, File.read(old_pid).to_i)
