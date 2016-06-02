@@ -7,7 +7,9 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
-server '192.168.33.10', user: 'vagrant', roles: %w(app db web)
+set :rails_env, 'production'
+
+server 'unicorn_verification_env', user: 'vagrant', roles: %w(app web)
 
 
 # role-based syntax

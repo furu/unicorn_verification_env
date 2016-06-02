@@ -2,7 +2,8 @@
 lock '3.5.0'
 
 set :application, 'foo'
-set :repo_url, 'https://github.com/furu/unicorn_verification_env.git'
+# set :repo_url, 'https://github.com/furu/unicorn_verification_env.git'
+set :repo_url, -> { "file://#{Dir.pwd}/.git" }
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -13,6 +14,7 @@ set :deploy_to, "/home/vagrant/www/#{fetch(:application)}"
 
 # Default value for :scm is :git
 # set :scm, :git
+set :scm, :gitcopy
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
